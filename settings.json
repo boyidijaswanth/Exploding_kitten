@@ -1,0 +1,28 @@
+{
+    "dev":
+    {
+        "database":
+        {
+            "host": "localhost",
+            "port": "6379",
+            "password": "Password@123",
+            "leader_board_db": "leader_board",
+            "selected_deck_db": "selected_deck",
+            "unselected_deck_db": "unselected_deck",
+            "cards": ["Cat card", "Defuse card", "Shuffle card", "Exploding kitten card"],
+            "deck_size": 5
+        },
+        "app":
+        {
+            "port": 7001,
+            "deck_size": 5,
+            "action":
+            {
+                "Shuffle card": "shuffle",
+                "Exploding kitten card": "end_game"
+            },
+            "safe_card": "Defuse card",
+            "bomb_card": "Exploding kitten card"
+        }
+    }
+}
