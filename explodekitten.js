@@ -98,7 +98,6 @@ class ExplodeKitten {
                         return;
                     }
                     unselected_cards = 0;
-                    selected_cards = []
                 } else {
                     update_cards = await explodekitten_db.select_card(data.user_name, users_deck[0], users_deck[1]);
                     if (!update_cards) {
