@@ -1,5 +1,5 @@
 import './App.css';
-import ModalComponent from './components/modalComponent';
+import ModalComponent from './components/LoginComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './components/Dashboard';
 import {
@@ -9,6 +9,7 @@ import {
   Link,
   BrowserRouter
 } from 'react-router-dom';
+import LeaderBoard from './components/LeaderBoard';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={ModalComponent} />
           <Route path='/dashboard' component={Dashboard} />
-          <Route path='/leaderboard' component={Dashboard} />
+          <Route path='/leaderboard' component={LeaderBoard} />
         </Switch>
       </BrowserRouter>
     </div>

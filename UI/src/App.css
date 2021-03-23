@@ -15,6 +15,21 @@
   align-items: center;
 }
 
+.container1 {
+  height: 100%;
+  margin-left: 20%;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.tableContiner {
+  height: 90%;
+  overflow: auto;
+  width: 100%;
+}
 .cookiesContent {
   width: 320px;
   display: flex;
@@ -44,10 +59,17 @@ button.close {
 .header {
   font-family: 'Pangolin', cursive;
   margin-bottom: 24px;
-  font-size: 24px;
+  font-size: 18 px;
   font-weight: 600;
 }
-button.accept {
+
+.alertText {
+  font-family: 'Pangolin', cursive;
+  font-size: 18 px;
+  font-weight: 600;
+}
+button.accept,
+.btn1 {
   background-color: #ed6755;
   border: none;
   border-radius: 5px;
@@ -55,6 +77,30 @@ button.accept {
   padding: 14px;
   font-size: 16px;
   color: white;
+  box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1);
+}
+.btn1 {
+  margin: 0px 5px;
+  padding: 4px;
+}
+.topDiv {
+  padding: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.back {
+  background-color: #ed6755;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  padding: 7px;
+  font-size: 12px;
+  color: white;
+  margin: 10px;
   box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1);
 }
 
@@ -76,8 +122,8 @@ button.accept {
 }
 
 .card {
-  height: 220px;
-  max-width: 200px;
+  height: 180px;
+  max-width: 160px;
   margin: 0;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
@@ -85,7 +131,7 @@ button.accept {
     0 100px 80px rgba(0, 0, 0, 0.12);
 }
 .card:hover {
-  background-color: #343a40;
+  opacity: 0.9;
 }
 
 .card-img {
@@ -98,8 +144,9 @@ img {
 }
 
 .used-card {
-  height: 130px;
-  max-width: 130px;
+  height: 120px;
+  max-width: 120px;
+  background-color: wheat;
 }
 
 .used-card-img {
@@ -112,4 +159,8 @@ img {
   width: 90%;
   border-radius: 5px;
   margin-bottom: 5px;
+}
+
+button:hover {
+  opacity: 0.9;
 }

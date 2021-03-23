@@ -46,7 +46,7 @@ export default class ModalComponent extends Component {
     return (
       <div className='container'>
         <div className='cookiesContent'>
-          <button className='close'>✖</button>
+          <button className='close'></button>
           <img src={Logo} alt='kitten-img' className='logo' />
           <p className='header'>Exploding Kitten</p>
           <input
