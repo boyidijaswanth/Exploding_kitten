@@ -2,7 +2,7 @@
   "name": "project",
   "version": "3.0.0",
   "description": "interview project",
-  "main": "realtimestocks.js",
+  "main": "explodekitten.js",
   "scripts": {
     "start": "node explodekitten.js",
     "test": "mocha --timeout 10000"
