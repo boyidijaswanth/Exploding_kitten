@@ -18,7 +18,7 @@ A web-based game in which the user will save a kitten from getting exploded.
 1. Install Nodejs version v14.15.0.
 2. Install npm version 6.14.8.
 3. Install redis version 3.0.504.
-4. Set a password to Redis(can also be a temporary one) to have a layer for security, using the command CONFIG SET require pass "password". please note that this authentication is temporary.
+4. Set a password to Redis(can also be a temporary one) to have a layer for security, using the command CONFIG SET requirepass "password". please note that this authentication is temporary.
 5. In case if you don't want to have a password for Redis, remove the password while creating the redis client.
 
 # Backend
