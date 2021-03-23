@@ -57,6 +57,8 @@ describe('/PUT new_game', () => {
                 res.body.should.have.property('status').eql('Success');
                 res.body.message.should.have.property('unselected_cards');
                 res.body.message.should.have.property('selected_cards');
+                res.body.message.should.have.property('user_name');
+                res.body.message.should.have.property('user_name').eql(new_game_data.user_name);
                 done();
             });
     });
