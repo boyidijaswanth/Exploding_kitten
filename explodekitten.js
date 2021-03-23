@@ -49,6 +49,7 @@ class ExplodeKitten {
         response.send({
             status: "Success",
             message: {
+                user_name: data.user_name,
                 unselected_cards: unselected_cards,
                 selected_cards: existing_session[1]
             }
