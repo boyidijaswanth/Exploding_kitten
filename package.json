@@ -4,7 +4,7 @@
   "description": "interview project",
   "main": "realtimestocks.js",
   "scripts": {
-    "start": "node realtimestocks.js",
+    "start": "node explodekitten.js",
     "test": "mocha --timeout 10000"
   },
   "author": "",
