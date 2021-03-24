@@ -22,7 +22,7 @@ export default class GameOver extends Component {
   };
 
   leaderBoard = () => {
-    this.props.history.push('/leaderboard');
+    this.props.navigateToLeaderBoard();
   };
 
   render() {

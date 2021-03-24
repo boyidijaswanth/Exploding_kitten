@@ -234,6 +234,7 @@ export default class Dashboard extends Component {
             result={this.state.result}
             restartGame={this.restartGame}
             score={this.state.score}
+            navigateToLeaderBoard={this.navigateToLeaderBoard}
           />
         ) : (
           ''
