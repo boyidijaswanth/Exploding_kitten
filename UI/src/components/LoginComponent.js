@@ -18,25 +18,14 @@ export default class ModalComponent extends Component {
   };
 
   submitUserName = name => {
-    axios
-      .put('http://localhost:7001/new_game', { user_name: name })
-      .then(res => {
-        const {
-          user_name,
-          selected_cards,
-          unselected_cards
-        } = res.data.message;
-        console.log(this.props.history);
-        this.props.history.push({
-          pathname: '/dashboard',
-          state: { userName: user_name }
-        });
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.props.history.push({
+      pathname: '/dashboard',
+      state: { userName: name }
+    });
   };
 
-  submitName = () => {
+  submitName = e => {
+    e.preventDefault();
     this.state.userName.length > 0
       ? this.submitUserName(this.state.userName)
       : this.submitUserName('Noobie');
@@ -49,17 +38,19 @@ export default class ModalComponent extends Component {
           <button className='close'></button>
           <img src={Logo} alt='kitten-img' className='logo' />
           <p className='header'>Exploding Kitten</p>
-          <input
-            type='text'
-            className='name'
-            name='userName'
-            placeholder='User name'
-            onChange={this.changeHandler}
-            value={this.state.userName}
-          />
-          <button className='accept' onClick={this.submitName}>
-            start game!
-          </button>
+          <form>
+            <input
+              type='text'
+              className='name'
+              name='userName'
+              placeholder='User name'
+              onChange={this.changeHandler}
+              value={this.state.userName}
+            />
+            <button className='accept' type='submit' onClick={this.submitName}>
+              start game!
+            </button>
+          </form>
         </div>
       </div>
     );

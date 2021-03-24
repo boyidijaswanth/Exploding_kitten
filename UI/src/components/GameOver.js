@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, ModalBody } from 'react-bootstrap';
 
 export default class GameOver extends Component {
   constructor(props) {
@@ -21,7 +21,9 @@ export default class GameOver extends Component {
     this.props.restartGame();
   };
 
-  leaderBoard = () => {};
+  leaderBoard = () => {
+    this.props.history.push('/leaderboard');
+  };
 
   render() {
     return (
@@ -31,15 +33,18 @@ export default class GameOver extends Component {
         backdrop='static'
         keyboard={false}
       >
-        <Modal.Body closeButton>
+        <Modal.Header closeButton>
           <Modal.Title>{this.props.result}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h5>{`Your Score  - ${this.props.score}`}</h5>
         </Modal.Body>
         <Modal.Footer>
           <Button variant='secondary' onClick={this.restart}>
             Restart
           </Button>
-          <Button variant='primary' onClick={this.handleClose}>
-            Close
+          <Button variant='primary' onClick={this.leaderBoard}>
+            Leader board
           </Button>
         </Modal.Footer>
       </Modal>

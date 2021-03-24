@@ -15,19 +15,46 @@ export default class Dashboard extends Component {
     super(props);
 
     this.state = {
-      availableCards: 5,
+      availableCards: 0,
       usedCards: 0,
       lastSelectedCard: '',
       selectedCards: [],
       gameOver: false,
       result: '',
       userName: '',
-      alertText: ''
+      alertText: '',
+      score: ''
     };
   }
 
   componentDidMount = () => {
-    this.restartGame();
+    try {
+      if (this.props.location.state) {
+        this.newGame(userName);
+      }
+    } catch (error) {
+      alert(error);
+      this.props.history.push('/');
+    }
+  };
+
+  newGame = name => {
+    axios
+      .put('http://localhost:7001/new_game', { user_name: name })
+      .then(res => {
+        const {
+          user_name,
+          selected_cards,
+          unselected_cards
+        } = res.data.message;
+        console.log('username', userName);
+        this.setState({
+          userName: user_name,
+          selectedCards: selected_cards,
+          availableCards: unselected_cards
+        });
+      })
+      .catch(err => alert(err));
   };
 
   componentWillMount = () => {
@@ -69,11 +96,16 @@ export default class Dashboard extends Component {
   drawCard = cardNumber => {
     axios
       .post('http://localhost:7001/draw_card', {
-        user_name: userName,
+        user_name: this.state.userName,
         selected_card: cardNumber
       })
       .then(obj => {
-        const { card, selected_cards, unselected_cards } = obj.data.message;
+        const {
+          card,
+          selected_cards,
+          unselected_cards,
+          score
+        } = obj.data.message;
 
         // If bomb card then check for num of difuse cards
         // If difuse cards > no of bomb cards then prompt user to difuse else end the game
@@ -90,6 +122,15 @@ export default class Dashboard extends Component {
           alert('Oh You picked shuffle card, the game will restart');
           this.setState({ alertText: '' });
         }
+        console.log(selected_cards.length, unselected_cards);
+        if (selected_cards.length === 5 && unselected_cards === 0) {
+          this.setState({
+            gameOver: true,
+            result: 'Congrats !! You Won 👌👌',
+            score: score ? score.points : 0
+          });
+        }
+
         if (card === 'Exploding kitten card') {
           if (
             this.countOccurrences(selected_cards, 'Defuse card') >=
@@ -102,15 +143,15 @@ export default class Dashboard extends Component {
             if (unselected_cards === 0) {
               this.setState({
                 gameOver: true,
-                result: 'Oh no!! You lost the game 😑😶'
+                result: 'Oh no!! You lost the game 😑😶',
+                score: score.points
               });
             }
           }
         }
-
-        if (selected_cards.length === 5 && unselected_cards === 0) {
-          this.setState({ gameOver: true, result: 'Congrats !! You Won 👌👌' });
-        }
+      })
+      .catch(obj => {
+        console.log(obj);
       });
   };
 
@@ -161,16 +202,16 @@ export default class Dashboard extends Component {
           <h4 className='alertText'>
             {this.state.alertText
               ? this.state.alertText
-              : `Bonjour ${userName} !! Welcome back.`}
+              : `Bonjour ${this.state.userName} !! Welcome back.`}
           </h4>
         </Alert>
         <div>
           <button className='btn1' onClick={this.restartGame}>
             Restart game!
           </button>
-          <button className='btn1' onClick={this.navigateToLeaderBoard}>
+          {/* <button className='btn1' onClick={this.navigateToLeaderBoard}>
             Leader board
-          </button>
+          </button> */}
           <button className='btn1' onClick={this.navigateToLogin}>
             Exit
           </button>
@@ -189,7 +230,11 @@ export default class Dashboard extends Component {
         </Row>
 
         {this.state.gameOver ? (
-          <GameOver result={this.state.result} restartGame={this.restartGame} />
+          <GameOver
+            result={this.state.result}
+            restartGame={this.restartGame}
+            score={this.state.score}
+          />
         ) : (
           ''
         )}
