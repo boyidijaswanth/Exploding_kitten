@@ -8,7 +8,6 @@ export default class LeaderBoard extends Component {
 
     this.state = {
       data: [],
-      objKeys: [],
       userName: ''
     };
   }
@@ -20,15 +19,20 @@ export default class LeaderBoard extends Component {
   componentDidMount = () => {
     axios
       .get('http://localhost:7001/leader_board')
-      .then(obj =>
+      .then(obj =>{
+        const user_name_response = Object.keys(obj.data.message);
+        let leader_board_response = Object.values(obj.data.message);
+        leader_board_response.map((record,index)=>{
+          record.user_name= user_name_response[index]
+        })
+        leader_board_response.sort((a,b) => b.percentage - a.percentage);
         this.setState({
-          objKeys: Object.keys(obj.data.message),
-          data: obj.data.message,
+          data: leader_board_response,
           userName: this.props.location.state.userName
             ? this.props.location.state.userName
             : 'Noobie'
         })
-      )
+      })
       .catch(err => alert(err));
   };
   render() {
@@ -54,11 +58,11 @@ export default class LeaderBoard extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.objKeys.map((obj, index) => {
-                const data = this.state.data[obj];
+              {
+                this.state.data.map((data, index) => {
                 return (
                   <tr key={index}>
-                    <td>{obj}</td>
+                    <td>{data.user_name}</td>
                     <td>{data.games}</td>
                     <td>{data.points}</td>
                     <td>{data.percentage}</td>
