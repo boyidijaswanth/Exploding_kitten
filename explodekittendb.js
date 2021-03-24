@@ -133,5 +133,14 @@ class ExplodeKittendb {
         if (!points_details) {}
         return points_details;
     }
+    async get_single_score(user_name) {
+        let score = await this.getoneAsync(this.config.leader_board_db, user_name);
+        if (score instanceof Error) {
+            return {}
+        }
+        if (!score) return {}
+        score = JSON.parse(score)
+        return { games: score[0], points: score[1], percentage: ((score[1] / score[0]) * 100).toFixed(2)}
+    }
 }
 module.exports = ExplodeKittendb;

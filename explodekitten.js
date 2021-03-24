@@ -65,6 +65,8 @@ class ExplodeKitten {
         let selected_cards = null;
         let update_cards = null;
         let shuffle_deck = null;
+        let score = null;
+        let message = null;
         if (!data.user_name || (data.user_name && data.user_name.length == 0)) {
             response.status(400).send({ status: "Failed", message: "user_name name cannot be empty or NULL" });
             return;
@@ -98,6 +100,7 @@ class ExplodeKitten {
                         return;
                     }
                     unselected_cards = 0;
+                    score = await explodekitten_db.get_single_score(data.user_name);
                 } else {
                     update_cards = await explodekitten_db.select_card(data.user_name, users_deck[0], users_deck[1]);
                     if (!update_cards) {
@@ -120,13 +123,15 @@ class ExplodeKitten {
                 return;
             }
         }
+        message = {
+            card: selected_card,
+            unselected_cards: unselected_cards,
+            selected_cards: selected_cards
+        }
+        if (score) message.score = score
         response.send({
             status: "Success",
-            message: {
-                card: selected_card,
-                unselected_cards: unselected_cards,
-                selected_cards: selected_cards
-            }
+            message: message
         });
         return;
     }
