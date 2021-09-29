@@ -1,5 +1,5 @@
 # Exploding_kitten
-A web-based game in which the user will save a kitten from getting exploded.
+It is A web-based game in which the user will save a kitten from getting exploded.
 
 1. Whenever a User opens the game, the User will be asked to enter the user name, if the User name is a valid user name and there isn't any incomplete game for that user a new game will be started.
 2. If there is a previous incomplete game for that user then the user will be asked to continue or restart the game. if the user selects restart the game, then the previous game will be closed and the number of times the game played by that user will be increased and a new game will be started.
