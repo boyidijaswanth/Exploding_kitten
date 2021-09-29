@@ -24,5 +24,7 @@
             "safe_card": "Defuse card",
             "bomb_card": "Exploding kitten card"
         }
-    }
+    },
+    "test":
+    {}
 }
